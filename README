@@ -1,0 +1,129 @@
+Selea Tudor Octavia - 322CA - Etapa2 - Tema Analiza Algoritmilor
+
+algo.h:
+	-Contine:
+		- semnaturile algoritmilor implementati
+		- Structura Edge, folosita pentru implementarea
+		  algorimului Bellmann-Ford
+
+algo1.c:
+	- Implementarea algorimului Djikstra
+	- sursa: https://www.geeksforgeeks.org/dijkstras-algorithm-for-adjacency-list-representation-greedy-algo-8/?ref=lbp
+
+algo2.c:
+	- Implementarea algoritmului Bellman-Ford
+	- sursa: https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/
+
+algo3.c
+	- Implementarea Celei mai eficiente metode pentru grafuri
+	  orientate aciclice (MEAInDAG)
+	- sursa: https://www.geeksforgeeks.org/shortest-path-for-directed-acyclic-graphs/
+
+Makefile:
+	- run-best - ruleaza Cea mai eficienta metoda pentru grafuri
+	             orientate aciclice
+	- run-p1 - ruleaza algorimtul Djikstra
+	- run-p2 - ruleaza algoritmul Bellman-Ford
+	
+
+LinkedList.c si ListGraph.c:
+	- Folosite pentru reprezentarea grafurilor testate sub forma
+	  unor liste de adiacenta
+	- Folosite in implementarea algorimilor Djikstra si Cea mai
+	  eficienta metoda pentru grafuri orientate aciclice (Bellman-Ford
+	  are nevoie doar de structura Edge, implementata in algo.h)
+
+Stack.c:
+	- Folosit in implementarea algoritmului Cea mai eficienta metoda
+	  pentru grafuri orientate aciclice
+
+LinkedList.h, ListGraph.h, Stack.h:
+	- Contin semnaturile functiilor implementate in LinkedList.c,
+	  ListGraph.c, Stack.c
+	   
+graph_tester1.c:
+	- testeaza algoritmul Djikstra
+
+graph_tester2.c:
+	- testeaza algoritmul Bellman-Ford
+
+graph_tester3.c:
+	- testeaza algoritmul Cea mai eficienta metoda pentru grafuri
+	  orientate aciclice
+
+graph_generator.c:
+	- folosit pentru generarea testelor de intrare din fisierul in
+
+in:
+	- folderul contine 41 de teste de intrare
+	- fiecare test contine:
+		- pe prima linie: N M S (in aceasta ordine), unde:
+			- N = numarul de noduri
+			- M = numarul de muchii
+			- S = nodul-sursa
+		- pe urmatoarele M linii: src dest weight (in aceasta
+		  ordine), unde:
+			- src = nodul din care pleaca muchia
+			- dest = nodul in care se duce mucha
+			- weight = costul muchiei
+			Obs! 
+			  Orientarea muchiei este de la src la dest!
+	- primele 7 teste reprezinta grafuri de pe :
+		- OCW (testele 1-3) : https://ocw.cs.pub.ro/courses/sd-ca/laboratoare/lab-07
+	  	- GeeksforGeeks :
+	  		- testul 4: https://www.geeksforgeeks.org/shortest-path-for-directed-acyclic-graphs/
+	  		- testul 5: https://www.geeksforgeeks.org/dijkstras-algorithm-for-adjacency-list-representation-greedy-algo-8/?ref=lbp
+	  		Obs! Rezultatul testului 5 este gresit pe GeeksforGeeks!
+	  	- Wikipedia (6 - 7): https://en.wikipedia.org/wiki/Directed_acyclic_graph
+	  testate manual sau cu ajutorul site-ului: 
+		https://www.easycalculation.com/operations-research/shortest-path-calculator.php
+		
+	- restul testelor (8 - 41) au fost generate folosind generatorul
+	  implementat in graph_generator.c
+	- testele 8 - 12: contin grafuri cu 0 muchii
+	- testele 13 - 21: contin grafuri rare
+	- testele 22 - 30: contin grafuri dense
+	- testele 30 - 41: contin grafuri random (pot fi dense sau rare sau
+	  intre, in functie de rezultatul functiei rand() )
+	  
+	Obs1!
+	  Intrucat Cea mai eficienta metoda pentru grafuri orientate
+	aciclice functioneaza doar pentru grafuri orientate aciclice,
+	iar Djikstra functioneaza doar pentru grafuri cu muchii de cost 
+	pozitiv, nu am inclus in testele de intrare grafuri cu muchii de 
+	cost negativ sau care au ciclii (fie ei pozitivi).
+	
+	Obs2!
+	   Testele contin grafuri cu un numar de noduri cuprins intre 5 si
+	1500 de noduri (pentru un numar mai mare de 1500 de noduri dura 
+	prea mult rularea programului).
+	
+	Obs3!
+	   Am considerat un graf "dens" drept un graf care poate fi reprezentat
+	sub forma unei matrice superior-triunghiulara. 
+
+out:
+	- contine 3 foldere:
+		- best: - contine testele de iesire ale algorimtului
+			  Cea mai eficienta metoda pentru grafuri orientate
+			  aciclice
+		- p1: - contine testele de iesire ale algoritmului
+			Djikstra
+		- p2: - contine testele de iesire ale algoritmului
+			Bellman-Ford
+	- fiecare folder contine 41 de teste de iesire
+	- fiecare test contine, pe o linie, distanta minima de la nodul
+	sursa la toate celelalte noduri
+
+checker.py:
+	- checkerul folosit pentru verificarea finala a temei
+	- a fost luat din acest repository:
+	 	https://github.com/AlexandraImbrisca/example.
+	- recomandare rulare:
+		python3 checker --algo ALGO --task TASK --unique-tests
+		
+		-ALGO = {best, p1, p2}, unde
+			- best apeleaza run-best in Makefile
+			- p1 apeleaza run-p1 in Makefile
+			- p2 apeleaza run-p2 in Makefile
+
